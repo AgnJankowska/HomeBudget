@@ -1,21 +1,21 @@
-#include "MetodyPomocnicze.h"
-
-string MetodyPomocnicze::konwerjsaIntNaString(int liczba) {
+#include "SubsidiaryMethods.h"
+/*
+string SubsidiaryMethods::konwerjsaIntNaString(int liczba) {
     ostringstream ss;
     ss << liczba;
     string str = ss.str();
     return str;
 }
-
-string MetodyPomocnicze::wczytajLinie() {
+*/
+string SubsidiaryMethods::getLine() {
     cin.sync();
-    string wejscie = "";
-    getline(cin, wejscie);
-    return wejscie;
+    string input = "";
+    getline(cin, input);
+    return input;
 }
+/*
 
-
-string MetodyPomocnicze::pobierzLiczbe(string tekst, int pozycjaZnaku) {
+string SubsidiaryMethods::pobierzLiczbe(string tekst, int pozycjaZnaku) {
     string liczba = "";
     while(isdigit(tekst[pozycjaZnaku]) == true) {
         liczba += tekst[pozycjaZnaku];
@@ -24,15 +24,15 @@ string MetodyPomocnicze::pobierzLiczbe(string tekst, int pozycjaZnaku) {
     return liczba;
 }
 
-int MetodyPomocnicze::konwersjaStringNaInt(string liczba) {
+int SubsidiaryMethods::konwersjaStringNaInt(string liczba) {
     int liczbaInt;
     istringstream iss(liczba);
     iss >> liczbaInt;
 
     return liczbaInt;
-}
+} */
 
-char MetodyPomocnicze::wczytajZnak() {
+char SubsidiaryMethods::getCharacter() {
     string wejscie = "";
     char znak  = {0};
     cin.sync();
@@ -47,8 +47,8 @@ char MetodyPomocnicze::wczytajZnak() {
     }
     return znak;
 }
-
-string MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(string tekst) {
+/*
+string SubsidiaryMethods::zamienPierwszaLitereNaDuzaAPozostaleNaMale(string tekst) {
     if (!tekst.empty())
     {
         transform(tekst.begin(), tekst.end(), tekst.begin(), ::tolower);
@@ -57,7 +57,7 @@ string MetodyPomocnicze::zamienPierwszaLitereNaDuzaAPozostaleNaMale(string tekst
     return tekst;
 }
 
-int MetodyPomocnicze::wczytajLiczbeCalkowita()
+int SubsidiaryMethods::wczytajLiczbeCalkowita()
 {
     string wejscie = "";
     int liczba = 0;
@@ -73,3 +73,4 @@ int MetodyPomocnicze::wczytajLiczbeCalkowita()
     }
     return liczba;
 }
+*/

@@ -1,26 +1,28 @@
-#ifndef PlikZUzytkownikami_H
-#define PlikZUzytkownikami_H
+#ifndef UsersFile_H
+#define UsersFile_H
 #include <iostream>
 #include <vector>
 #include <fstream>
 #include <cstdlib>
 
-#include "Uzytkownik.h"
-#include "MetodyPomocnicze.h"
-#include "PlikTekstowy.h"
+#include "User.h"
+#include "SubsidiaryMethods.h"
+
 using namespace std;
 
-class PlikZUzytkownikami : public PlikTekstowy
+class UsersFile
 {
-    string zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(Uzytkownik uzytkownik);
+    //string zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(Uzytkownik uzytkownik);
 
 public:
-    PlikZUzytkownikami (string nazwaPlikuZUzytkownikami)
-        : PlikTekstowy(nazwaPlikuZUzytkownikami) {};
+    const string NAME_OF_FILE_WITH_USERS;
 
-    void dopiszUzytkownikaDoPliku(Uzytkownik uzytkownik);
-    vector <Uzytkownik> wczytajUzytkownikowZPliku();
-    Uzytkownik pobierzDaneUzytkownika(string daneJednegoUzytkownikaOddzielonePionowymiKreskami);
-    void zapiszWszystkichUzytkownikowDoPliku(vector <Uzytkownik> uzytkownicy);
+public:
+    UsersFile(string nameOfFileWithUsers) : NAME_OF_FILE_WITH_USERS(nameOfFileWithUsers) {}
+
+   //void dopiszUzytkownikaDoPliku(Uzytkownik uzytkownik);
+    //vector <Uzytkownik> wczytajUzytkownikowZPliku();
+    //Uzytkownik pobierzDaneUzytkownika(string daneJednegoUzytkownikaOddzielonePionowymiKreskami);
+    //void zapiszWszystkichUzytkownikowDoPliku(vector <Uzytkownik> uzytkownicy);
 };
 #endif
