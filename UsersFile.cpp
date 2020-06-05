@@ -1,103 +1,88 @@
 #include "UsersFile.h"
-/*
-string PlikZUzytkownikami::zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(Uzytkownik uzytkownik) {
-    string liniaZDanymiUzytkownika = "";
-    liniaZDanymiUzytkownika += MetodyPomocnicze::konwerjsaIntNaString(uzytkownik.pobierzId())+ '|';
-    liniaZDanymiUzytkownika += uzytkownik.pobierzLogin() + '|';
-    liniaZDanymiUzytkownika += uzytkownik.pobierzHaslo() + '|';
 
-    return liniaZDanymiUzytkownika;
+void UsersFile::saveUserToFile(User user)
+{
+    CMarkup xml;
+
+    bool IsFileExist=xml.Load (NAME_OF_FILE_WITH_USERS);
+    if (!IsFileExist)
+    {
+        xml.SetDoc("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
+        xml.AddElem ("Users");
+    }
+
+    xml.FindElem();
+    xml.IntoElem();
+    xml.AddElem ("User");
+    xml.IntoElem();
+    xml.AddElem ("UserID", user.getId());
+    xml.AddElem ("FirstName", user.getFirstName());
+    xml.AddElem ("SecondName", user.getSecondName());
+    xml.AddElem ("Login", user.getLogin());
+    xml.AddElem ("Password", user.getPassword());
+
+    xml.Save("users.xml");
 }
 
-void PlikZUzytkownikami::dopiszUzytkownikaDoPliku(Uzytkownik uzytkownik) {
-    fstream plikTekstowy;
-    string liniaZDanymiUzytkownika = "";
-    plikTekstowy.open(pobierzNazwePliku().c_str(), ios::app);
+void UsersFile::saveAllUsersToFile(vector <User> users)
+{
+    CMarkup xml;
+    bool IsFileExist=xml.Load (NAME_OF_FILE_WITH_USERS);
 
-    if (plikTekstowy.good() == true) {
-        liniaZDanymiUzytkownika = zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(uzytkownik);
+    xml.ResetPos();
+    xml.RemoveElem();
+    xml.SetDoc("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
+    xml.AddElem ("Users");
 
-        if (czyPlikJestPusty() == true) {
-            plikTekstowy << liniaZDanymiUzytkownika;
-        }
-        else {
-            plikTekstowy << endl << liniaZDanymiUzytkownika ;
-        }
+    for (int i=0; i<users.size(); i++)
+    {
+        xml.FindElem();
+        xml.IntoElem();
+        xml.AddElem ("User");
+        xml.IntoElem();
+        xml.AddElem ("UserID", users[i].getId());
+        xml.AddElem ("FirstName", users[i].getFirstName());
+        xml.AddElem ("SecondName", users[i].getSecondName());
+        xml.AddElem ("Login", users[i].getLogin());
+        xml.AddElem ("Password", users[i].getPassword());
+        xml.OutOfElem();
+        xml.OutOfElem();
     }
-    else
-        cout << "Nie udalo sie otworzyc pliku " << pobierzNazwePliku() << " i zapisac w nim danych." << endl;
 
-    plikTekstowy.close();
+    xml.Save("users.xml");
 }
 
-vector <Uzytkownik> PlikZUzytkownikami::wczytajUzytkownikowZPliku() {
-    fstream plikTekstowy;
-    Uzytkownik uzytkownik;
-    vector <Uzytkownik> uzytkownicy;
-    string daneJednegoUzytkownikaOddzielonePionowymiKreskami = "";
+vector <User> UsersFile::loadUsersFromFile()
+{
+    User user;
+    CMarkup xml;
 
-    plikTekstowy.open(pobierzNazwePliku().c_str(), ios::in);
+    bool IsFileExist = xml.Load (NAME_OF_FILE_WITH_USERS);
 
-    if (plikTekstowy.good() == true) {
-        while (getline(plikTekstowy, daneJednegoUzytkownikaOddzielonePionowymiKreskami)) {
-            uzytkownik = pobierzDaneUzytkownika(daneJednegoUzytkownikaOddzielonePionowymiKreskami);
-            uzytkownicy.push_back(uzytkownik);
-        }
+    string zmienna;
+    xml.ResetPos();
+    xml.FindElem();
+    xml.IntoElem();
 
+    while ( xml.FindElem("User") )
+    {
+        xml.IntoElem();
+        xml.FindElem("UserID");
+        user.setId(SubsidiaryMethods::conversionStrintToInteger(xml.GetData()));
+        xml.FindElem("FirstName");
+        user.setFirstName(xml.GetData());
+        xml.FindElem("SecondName");
+        user.setSecondName(xml.GetData());
+        xml.FindElem("Login");
+        user.setLogin(xml.GetData());
+        xml.FindElem("Password");
+        user.setPassword(xml.GetData());
+
+        xml.OutOfElem();
+        users.push_back(user);
     }
-    plikTekstowy.close();
-    return uzytkownicy;
+    return users;
 }
 
-Uzytkownik PlikZUzytkownikami::pobierzDaneUzytkownika(string daneJednegoUzytkownikaOddzielonePionowymiKreskami) {
-    Uzytkownik uzytkownik;
-    string pojedynczaDanaUzytkownika = "";
-    int numerPojedynczejDanejUzytkownika = 1;
 
-    for (int pozycjaZnaku = 0; pozycjaZnaku < daneJednegoUzytkownikaOddzielonePionowymiKreskami.length(); pozycjaZnaku++) {
-        if (daneJednegoUzytkownikaOddzielonePionowymiKreskami[pozycjaZnaku] != '|') {
-            pojedynczaDanaUzytkownika += daneJednegoUzytkownikaOddzielonePionowymiKreskami[pozycjaZnaku];
-        }
-        else {
-            switch(numerPojedynczejDanejUzytkownika) {
-            case 1:
-                uzytkownik.ustawId(atoi(pojedynczaDanaUzytkownika.c_str()));
-                break;
-            case 2:
-                uzytkownik.ustawLogin(pojedynczaDanaUzytkownika);
-                break;
-            case 3:
-                uzytkownik.ustawHaslo(pojedynczaDanaUzytkownika);
-                break;
-            }
-            pojedynczaDanaUzytkownika = "";
-            numerPojedynczejDanejUzytkownika++;
-        }
-    }
-    return uzytkownik;
-}
 
-void PlikZUzytkownikami::zapiszWszystkichUzytkownikowDoPliku(vector <Uzytkownik> uzytkownicy) {
-    fstream plikTekstowy;
-    string liniaZDanymiUzytkownika = "";
-    plikTekstowy.open(pobierzNazwePliku().c_str(), ios::out);
-
-    if (plikTekstowy.good() == true) {
-        for (int i=0; i<uzytkownicy.size(); i++) {
-            liniaZDanymiUzytkownika = zamienDaneUzytkownikaNaLinieZDanymiOddzielonaPionowymiKreskami(uzytkownicy[i]);
-            if (i == uzytkownicy.size()-1) {
-                plikTekstowy << liniaZDanymiUzytkownika;
-            }
-            else {
-                plikTekstowy << liniaZDanymiUzytkownika << endl;
-            }
-
-            liniaZDanymiUzytkownika = "";
-        }
-    }
-    else {
-        cout << "Nie mozna otworzyc pliku " << pobierzNazwePliku() << endl;
-    }
-    plikTekstowy.close();
-}
-*/

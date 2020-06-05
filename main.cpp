@@ -4,7 +4,7 @@ using namespace std;
 
 int main()
 {
-    HomeBudget homeBudget("Users.txt");
+    HomeBudget homeBudget("Users.xml");
     char userChoice;
     while (true) {
         if (homeBudget.isUserSignedIn() == false) {

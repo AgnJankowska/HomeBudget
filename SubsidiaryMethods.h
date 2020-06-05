@@ -11,9 +11,9 @@ public:
     //static string konwerjsaIntNaString(int liczba);
     static string getLine();
     //static string pobierzLiczbe(string tekst, int pozycjaZnaku);
-    //static int konwersjaStringNaInt(string liczba);
+    static int conversionStrintToInteger(string number);
     static char getCharacter();
-    //static string zamienPierwszaLitereNaDuzaAPozostaleNaMale(string tekst);
+    static string switchFirstLetterToCapital(string text);
     //static int wczytajLiczbeCalkowita();
 };
 #endif

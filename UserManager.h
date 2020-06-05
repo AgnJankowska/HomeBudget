@@ -13,31 +13,30 @@ using namespace std;
 
 class UserManager
 {
+private:
+    UsersFile usersFile;
     int IdOfSignedIndUser;
     vector <User> users;
-
-    User enterNewUserData();
-    bool isLoginExist(string login);
-    UsersFile usersFile;
 
 public:
     UserManager (string nameOfFileWithUsers) : usersFile (nameOfFileWithUsers)
     {
         IdOfSignedIndUser = 0;
-    //    uzytkownicy = plikZUzytkownikami.wczytajUzytkownikowZPliku ();
+        users = usersFile.loadUsersFromFile ();
     };
 
-    int getNewUserId();
-    //int pobierzIdZalogowanegoUzytkownika();
+    int getIdOfSignedInUser();
 
     void registration();
     int singIn();
-    //void wypiszWszystkichUzytkownikow();
-    //void wczytajUzytkownikowZPliku();
-    //void zapiszWszystkichUzytkownikowDoPliku();
-
+    void saveAllUsersToFile();
     void changePassword();
     void logOut();
     bool isUserSignedIn();
+
+private:
+    User enterNewUserData();
+    bool isLoginExist(string login);
+    int getNewUserId();
 };
 #endif

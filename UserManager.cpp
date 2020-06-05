@@ -1,13 +1,7 @@
 #include "UserManager.h"
 
-void UserManager::registration() {
-    User user = enterNewUserData();
-
-    users.push_back(user);
-    //plikZUzytkownikami.dopiszUzytkownikaDoPliku(uzytkownik);
-
-    cout << endl << "Konto zalozono pomyslnie" << endl << endl;
-    system("pause");
+int UserManager::getIdOfSignedInUser() {
+    return IdOfSignedIndUser;
 }
 
 User UserManager::enterNewUserData() {
@@ -28,9 +22,11 @@ User UserManager::enterNewUserData() {
 
     cout << "Podaj imie: ";
     cin >> firstName;
+    firstName = SubsidiaryMethods::switchFirstLetterToCapital(firstName);
 
     cout << "Podaj nazwisko: ";
     cin >> secondName;
+    secondName = SubsidiaryMethods::switchFirstLetterToCapital(secondName);
 
     cout << "Podaj haslo: ";
     cin >> password;
@@ -40,13 +36,6 @@ User UserManager::enterNewUserData() {
     user.setPassword(password);
 
     return user;
-}
-
-int UserManager::getNewUserId() {
-    if (users.empty() == true)
-        return 1;
-    else
-        return users.back().getId() + 1;
 }
 
 bool UserManager::isLoginExist(string login) {
@@ -59,15 +48,22 @@ bool UserManager::isLoginExist(string login) {
     return false;
 }
 
-/*
-void UzytkownikManager::wypiszWszystkichUzytkownikow() {
-    for (int i=0; i < uzytkownicy.size(); i++) {
-        cout << uzytkownicy[i].pobierzId() << endl;
-        cout << uzytkownicy[i].pobierzLogin() << endl;
-        cout << uzytkownicy[i].pobierzHaslo() << endl;
-    }
+int UserManager::getNewUserId() {
+    if (users.empty() == true)
+        return 1;
+    else
+        return users.back().getId() + 1;
 }
-*/
+
+void UserManager::registration() {
+    User user = enterNewUserData();
+
+    users.push_back(user);
+    usersFile.saveUserToFile(user);
+
+    cout << endl << "Konto zalozono pomyslnie" << endl << endl;
+    system("pause");
+}
 
 int UserManager::singIn() {
     string login = "", password = "";
@@ -100,16 +96,9 @@ int UserManager::singIn() {
     return 0;
 }
 
-/*
-int UzytkownikManager::pobierzIdZalogowanegoUzytkownika() {
-    return idZalogowanegoUzytkownika;
+void UserManager::saveAllUsersToFile() {
+    usersFile.saveAllUsersToFile(users);
 }
-
-
-void UzytkownikManager::zapiszWszystkichUzytkownikowDoPliku() {
-    plikZUzytkownikami.zapiszWszystkichUzytkownikowDoPliku(uzytkownicy);
-}
-*/
 
 void UserManager::changePassword() {
     string newPassword = "";
@@ -123,7 +112,7 @@ void UserManager::changePassword() {
             system("pause");
         }
     }
-    //zapiszWszystkichUzytkownikowDoPliku();
+    usersFile.saveAllUsersToFile(users);
 }
 
 void UserManager::logOut() {

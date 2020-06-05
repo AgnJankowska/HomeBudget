@@ -23,40 +23,41 @@ string SubsidiaryMethods::pobierzLiczbe(string tekst, int pozycjaZnaku) {
     }
     return liczba;
 }
+*/
 
-int SubsidiaryMethods::konwersjaStringNaInt(string liczba) {
-    int liczbaInt;
-    istringstream iss(liczba);
-    iss >> liczbaInt;
+int SubsidiaryMethods::conversionStrintToInteger(string number) {
+    int numberInt;
+    istringstream iss(number);
+    iss >> numberInt;
 
-    return liczbaInt;
-} */
+    return numberInt;
+}
 
 char SubsidiaryMethods::getCharacter() {
-    string wejscie = "";
-    char znak  = {0};
+    string input = "";
+    char character  = {0};
     cin.sync();
     while (true) {
-        getline(cin, wejscie);
+        getline(cin, input);
 
-        if (wejscie.length() == 1) {
-            znak = wejscie[0];
+        if (input.length() == 1) {
+            character = input[0];
             break;
         }
         cout << "To nie jest pojedynczy znak. Wpisz ponownie." << endl;
     }
-    return znak;
-}
-/*
-string SubsidiaryMethods::zamienPierwszaLitereNaDuzaAPozostaleNaMale(string tekst) {
-    if (!tekst.empty())
-    {
-        transform(tekst.begin(), tekst.end(), tekst.begin(), ::tolower);
-        tekst[0] = toupper(tekst[0]);
-    }
-    return tekst;
+    return character;
 }
 
+string SubsidiaryMethods::switchFirstLetterToCapital(string text) {
+    if (!text.empty())
+    {
+        transform(text.begin(), text.end(), text.begin(), ::tolower);
+        text[0] = toupper(text[0]);
+    }
+    return text;
+}
+ /*
 int SubsidiaryMethods::wczytajLiczbeCalkowita()
 {
     string wejscie = "";
