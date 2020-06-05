@@ -32,7 +32,7 @@ int main()
 
             switch (userChoice) {
             case '1':
-                ;
+                homeBudget.addIncome();
                 break;
             case '2':
                 ;

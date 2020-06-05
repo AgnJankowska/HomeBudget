@@ -27,8 +27,8 @@ void UsersFile::saveUserToFile(User user)
 void UsersFile::saveAllUsersToFile(vector <User> users)
 {
     CMarkup xml;
-    bool IsFileExist=xml.Load (NAME_OF_FILE_WITH_USERS);
 
+    xml.Load (NAME_OF_FILE_WITH_USERS);
     xml.ResetPos();
     xml.RemoveElem();
     xml.SetDoc("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
@@ -57,7 +57,7 @@ vector <User> UsersFile::loadUsersFromFile()
     User user;
     CMarkup xml;
 
-    bool IsFileExist = xml.Load (NAME_OF_FILE_WITH_USERS);
+    xml.Load (NAME_OF_FILE_WITH_USERS);
 
     string zmienna;
     xml.ResetPos();
