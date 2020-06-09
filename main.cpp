@@ -4,7 +4,7 @@ using namespace std;
 
 int main()
 {
-    HomeBudget homeBudget("Users.xml", "Income.xml");
+    HomeBudget homeBudget("Users.xml", "Income.xml", "Expense.xml");
     char userChoice;
     while (true) {
         if (homeBudget.isUserSignedIn() == false) {
@@ -35,7 +35,7 @@ int main()
                 homeBudget.addIncome();
                 break;
             case '2':
-                ;
+                homeBudget.addExpense();
                 break;
             case '3':
                 ;

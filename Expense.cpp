@@ -1,9 +1,9 @@
-#include "Income.h"
+#include "Expense.h"
 
-void Income::setIncomeId (int newIncomeId){
-    incomeId = newIncomeId;
+void Expense::setExpenseId (int newExpenseId){
+    expenseId = newExpenseId;
 }
 
-int Income::getIncomeId (){
-    return incomeId;
+int Expense::getExpenseId (){
+    return expenseId;
 }

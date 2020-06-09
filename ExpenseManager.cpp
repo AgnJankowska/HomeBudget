@@ -1,55 +1,48 @@
-#include "IncomeManager.h"
+#include "ExpenseManager.h"
 
-Income IncomeManager::enterNewIncomeData(){
+Expense ExpenseManager::enterNewExpenseData(){
 
-    Income income;
+    Expense expense;
 
-    income.setUserId(ID_OF_SIGNED_IN_USER);
-    income.setIncomeId(incomesFile.getIdOfLastIncome()+1);
+    expense.setUserId(ID_OF_SIGNED_IN_USER);
+    expense.setExpenseId(expensesFile.getIdOfLastExpense()+1);
 
     string date = dateManager.selectDateOfIncomeOrExpense();
-    income.setDate(date);
+    expense.setDate(date);
 
     cout << "Podaj krotki opis: ";
-    income.setCategory(SubsidiaryMethods::getLine());
+    expense.setCategory(SubsidiaryMethods::getLine());
 
     cout << "Podaj kwote: ";
-    income.setAmount(SubsidiaryMethods::getFloatingNumberWithDot());
+    expense.setAmount(SubsidiaryMethods::getFloatingNumberWithDot());
 
-    return income;
+    return expense;
 }
 
-void IncomeManager::addIncome(){
+void ExpenseManager::addExpense(){
 
-    Income income = enterNewIncomeData();
+    Expense expense = enterNewExpenseData();
 
-    incomes.push_back(income);
-    incomesFile.saveIncomeToFile(income);
+    expenses.push_back(expense);
+    expensesFile.saveExpenseToFile(expense);
 
-    displayAddedIncome(income);
+    displayAddedExpense(expense);
     system("pause");
 }
 
-void IncomeManager::displayAddedIncome(Income income){
+void ExpenseManager::displayAddedExpense(Expense expense){
 
     system("cls");
-    cout << "-- Zapisana pozycja przychodu --" << endl;
+    cout << "-- Zapisana pozycja wydatku --" << endl;
     cout << endl;
-    cout << "Data: " << income.getDate() << endl;
-    cout << "Opis: " << income.getCategory() << endl;
-    cout << "Kwota: " << income.getAmount() << " zl."<< endl;
+    cout << "Data: " << expense.getDate() << endl;
+    cout << "Opis: " << expense.getCategory() << endl;
+    cout << "Kwota: " << expense.getAmount() << " zl."<< endl;
 
     cout  << endl;
 
-    cout << "ID wplywu: " << income.getIncomeId() << endl;
-    cout << "ID usera: " << income.getUserId() << endl;
-}
-
-int IncomeManager::getNewIncomeId() {
-    if (incomes.empty() == true)
-        return 1;
-    else
-        return incomes.back().getIncomeId() + 1;
+    cout << "ID wydatku: " << expense.getExpenseId() << endl;
+    cout << "ID usera: " << expense.getUserId() << endl;
 }
 
 

@@ -1,51 +1,47 @@
-#include "IncomesFile.h"
+#include "ExpensesFile.h"
 
-int IncomesFile::getIdOfLastIncome(){
-    int idOfLastIncome = 0;
+int ExpensesFile::getIdOfLastExpense(){
+    int idOfLastExpense = 0;
 
     CMarkup xml;
-    xml.Load (NAME_OF_INCOME_FILE);
+    xml.Load (NAME_OF_EXPENSES_FILE);
 
     xml.FindElem();
     xml.IntoElem();
-    while ( xml.FindElem("Income") ){
+    while ( xml.FindElem("Expense") ){
         xml.IntoElem();
-        xml.FindElem("IncomeID");
-        idOfLastIncome = SubsidiaryMethods::conversionStrintToInteger(xml.GetData());
+        xml.FindElem("ExpenseID");
+        idOfLastExpense = SubsidiaryMethods::conversionStrintToInteger(xml.GetData());
         xml.OutOfElem();
     }
 
-    return idOfLastIncome;
+    return idOfLastExpense;
 }
 
-void IncomesFile::saveIncomeToFile (Income income){
+void ExpensesFile::saveExpenseToFile (Expense expense){
     CMarkup xml;
 
-    bool IsFileExist=xml.Load (NAME_OF_INCOME_FILE);
+    bool IsFileExist=xml.Load (NAME_OF_EXPENSES_FILE);
     if (!IsFileExist)
     {
         xml.SetDoc("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
-        xml.AddElem ("Incomes");
+        xml.AddElem ("Expenses");
     }
 
     xml.FindElem();
     xml.IntoElem();
-    xml.AddElem ("Income");
+    xml.AddElem ("Expense");
     xml.IntoElem();
-    xml.AddElem ("IncomeID", income.getIncomeId());
-    xml.AddElem ("UserID", income.getUserId());
-    xml.AddElem ("Date", income.getDate());
-    xml.AddElem ("Category", income.getCategory());
-    xml.AddElem ("Amount", income.getAmount());
+    xml.AddElem ("ExpenseID", expense.getExpenseId());
+    xml.AddElem ("UserID", expense.getUserId());
+    xml.AddElem ("Date", expense.getDate());
+    xml.AddElem ("Category", expense.getCategory());
+    xml.AddElem ("Amount", expense.getAmount());
 
-    xml.Save(NAME_OF_INCOME_FILE);
+    xml.Save(NAME_OF_EXPENSES_FILE);
 }
 
-void IncomesFile::saveAllIncomesToFile (){
-;
-}
-
-void IncomesFile::loadIncomesFromFile (){
+void ExpensesFile::loadExpensesFromFile (){
 ;
 }
 

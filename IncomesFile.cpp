@@ -4,18 +4,23 @@ int IncomesFile::getIdOfLastIncome(){
     int idOfLastIncome = 0;
 
     CMarkup xml;
-    xml.Load (NAME_OF_INCOME_FILE);
-
-    xml.FindElem();
-    xml.IntoElem();
-    while ( xml.FindElem("Income") ){
-        xml.IntoElem();
-        xml.FindElem("IncomeID");
-        idOfLastIncome = SubsidiaryMethods::conversionStrintToInteger(xml.GetData());
-        xml.OutOfElem();
+    bool IsFileExist=xml.Load (NAME_OF_INCOME_FILE);
+    if (!IsFileExist){
+        return idOfLastIncome;
     }
 
-    return idOfLastIncome;
+    else {
+        xml.FindElem();
+        xml.IntoElem();
+        while ( xml.FindElem("Income") ){
+            xml.IntoElem();
+            xml.FindElem("IncomeID");
+            idOfLastIncome = SubsidiaryMethods::conversionStrintToInteger(xml.GetData());
+            xml.OutOfElem();
+        }
+        return idOfLastIncome;
+    }
+
 }
 
 void IncomesFile::saveIncomeToFile (Income income){
@@ -39,10 +44,6 @@ void IncomesFile::saveIncomeToFile (Income income){
     xml.AddElem ("Amount", income.getAmount());
 
     xml.Save(NAME_OF_INCOME_FILE);
-}
-
-void IncomesFile::saveAllIncomesToFile (){
-;
 }
 
 void IncomesFile::loadIncomesFromFile (){

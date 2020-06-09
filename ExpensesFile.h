@@ -1,27 +1,26 @@
-#ifndef IncomesFile_H
-#define IncomesFile_H
+#ifndef ExpensesFile_H
+#define ExpensesFile_H
 #include <iostream>
 #include <vector>
 
 #include "Markup.h"
 #include "CashFlowFile.h"
-#include "Income.h"
+#include "Expense.h"
 #include "SubsidiaryMethods.h"
 
 using namespace std;
 
-class IncomesFile : public CashFlowFile
+class ExpensesFile : public CashFlowFile
     {
-    vector <Income> incomes;
-    const string NAME_OF_INCOME_FILE;
+    vector <Expense> expenses;
+    const string NAME_OF_EXPENSES_FILE;
 
 public:
-    IncomesFile (string nameOfIncomesFile) : NAME_OF_INCOME_FILE(nameOfIncomesFile) {};
+    ExpensesFile (string nameOfExpensesFile) : NAME_OF_EXPENSES_FILE(nameOfExpensesFile) {};
 
-    int getIdOfLastIncome();
-    void saveIncomeToFile (Income income);
-    void saveAllIncomesToFile ();
-    void loadIncomesFromFile ();
+    int getIdOfLastExpense();
+    void saveExpenseToFile (Expense expense);
+    void loadExpensesFromFile ();
 
     };
 #endif

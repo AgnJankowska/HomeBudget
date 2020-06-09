@@ -45,11 +45,3 @@ void IncomeManager::displayAddedIncome(Income income){
     cout << "ID usera: " << income.getUserId() << endl;
 }
 
-int IncomeManager::getNewIncomeId() {
-    if (incomes.empty() == true)
-        return 1;
-    else
-        return incomes.back().getIncomeId() + 1;
-}
-
-

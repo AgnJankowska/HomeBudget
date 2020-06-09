@@ -9,7 +9,6 @@
 #include "Income.h"
 #include "DateManager.h"
 #include "UserManager.h"
-//#include "SubsidiaryMethods.h"
 
 using namespace std;
 
@@ -36,8 +35,6 @@ private:
     int getIdOfSignedInUser();
     void displayAddedIncome(Income income);
     Income enterNewIncomeData();
-    int getNewIncomeId ();
-
 
     };
 #endif

@@ -20,7 +20,6 @@ public:
 
     int getIdOfLastIncome();
     void saveIncomeToFile (Income income);
-    void saveAllIncomesToFile ();
     void loadIncomesFromFile ();
 
     };

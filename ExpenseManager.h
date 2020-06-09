@@ -1,28 +1,40 @@
-#ifndef IncomesFile_H
-#define IncomesFile_H
+#ifndef ExpenseManager_H
+#define ExpenseManager_H
 #include <iostream>
+#include <cstdlib>
+#include <stdio.h>
 #include <vector>
 
-#include "Markup.h"
-#include "CashFlowFile.h"
-#include "Income.h"
-#include "SubsidiaryMethods.h"
+#include "ExpensesFile.h"
+#include "Expense.h"
+#include "DateManager.h"
+#include "UserManager.h"
 
 using namespace std;
 
-class IncomesFile : public CashFlowFile
+class ExpenseManager
     {
-    vector <Income> incomes;
-    const string NAME_OF_INCOME_FILE;
+private:
+    ExpensesFile expensesFile;
+    DateManager dateManager;
+
+    const int ID_OF_SIGNED_IN_USER;
+    vector <Expense> expenses;
 
 public:
-    IncomesFile (string nameOfIncomesFile) : NAME_OF_INCOME_FILE(nameOfIncomesFile) {};
-
-    int getIdOfLastIncome();
-    void saveIncomeToFile (Income income);
-    void saveAllIncomesToFile ();
-    void loadIncomesFromFile ();
-
+    ExpenseManager (string nameOfExpensesFile, int userId)
+    : expensesFile (nameOfExpensesFile), ID_OF_SIGNED_IN_USER (userId)
+    {
+        //expenses = expensesFile.loadExpensesOfSignedInUser(ID_ZALOGOWANEGO_UZYTKOWNIKA);
     };
-#endif
 
+    void addExpense();
+
+private:
+    void addExpenseToExpensesFile(Expense expense);
+    int getIdOfSignedInUser();
+    void displayAddedExpense(Expense expense);
+    Expense enterNewExpenseData();
+    };
+
+#endif

@@ -1,22 +1,22 @@
-#ifndef Income_H
-#define Income_H
+#ifndef Expense_H
+#define Expense_H
 #include <iostream>
 #include "CashFlow.h"
 
 using namespace std;
 
-class Income : public CashFlow
+class Expense : public CashFlow
     {
-    int incomeId;
+    int expenseId;
 
 public:
-    Income (int incomeId=0)
+    Expense (int expenseId=0)
     {
-        this -> incomeId = incomeId;
+        this -> expenseId = expenseId;
     }
 
-    void setIncomeId (int newIncomeId);
-    int getIncomeId ();
+    void setExpenseId (int newExpenseId);
+    int getExpenseId ();
 
     };
 #endif
