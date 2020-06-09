@@ -1,12 +1,12 @@
 #include "SubsidiaryMethods.h"
-/*
-string SubsidiaryMethods::konwerjsaIntNaString(int liczba) {
+
+string SubsidiaryMethods::conversionIntegerToString(int number) {
     ostringstream ss;
-    ss << liczba;
+    ss << number;
     string str = ss.str();
     return str;
 }
-*/
+
 string SubsidiaryMethods::getLine() {
     cin.sync();
     string input = "";
@@ -57,21 +57,45 @@ string SubsidiaryMethods::switchFirstLetterToCapital(string text) {
     }
     return text;
 }
- /*
-int SubsidiaryMethods::wczytajLiczbeCalkowita()
-{
-    string wejscie = "";
-    int liczba = 0;
 
-    while (true)
-    {
-        getline(cin, wejscie);
+/*int SubsidiaryMethods::getInteger() {
+    string input = "";
+    int number = 0;
 
-        stringstream myStream(wejscie);
-        if (myStream >> liczba)
+    while (true) {
+        getline(cin, input);
+
+        stringstream myStream(imput);
+        if (myStream >> number)
             break;
         cout << "To nie jest liczba. Wpisz ponownie. " << endl;
     }
-    return liczba;
+    return number;
+}*/
+
+float SubsidiaryMethods::getFloatingNumberWithDot() {
+    string input;
+    float floatingNumber = 0;
+
+    while (true) {
+        getline(cin, input);
+
+        size_t position = input.find(',');
+        if( position != string::npos ) {
+            input = input.replace(position, 1, ".");
+        }
+
+        stringstream myStream(input);
+        if (myStream >> floatingNumber) {
+            break;
+        }
+
+        cout << "To nie jest liczba. Wpisz ponownie. " << endl;
+    }
+
+    float precision = 0.01;
+    float rounded = round(floatingNumber/precision)*precision;
+
+    return  rounded;
 }
-*/
+

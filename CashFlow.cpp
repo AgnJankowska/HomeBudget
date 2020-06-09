@@ -4,7 +4,7 @@ void CashFlow::setUserId (int newUserId){
     userId = newUserId;
 }
 
-void CashFlow::setDate (int newDate){
+void CashFlow::setDate (string newDate){
     date = newDate;
 }
 
@@ -20,7 +20,7 @@ int CashFlow::getUserId (){
     return userId;
 }
 
-int CashFlow::getDate (){
+string CashFlow::getDate (){
     return date;
 }
 

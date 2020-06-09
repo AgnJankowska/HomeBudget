@@ -1,12 +1,12 @@
 #ifndef CashFlow_H
-#define CashFlow_h
+#define CashFlow_H
 #include <iostream>
 using namespace std;
 
 class CashFlow
 {
     int userId;
-    int date;
+    string date;
     string category;
     float amount;
 
@@ -20,12 +20,12 @@ public:
     }
 
     void setUserId (int newUserId);
-    void setDate (int newDate);
+    void setDate (string newDate);
     void setCategory (string newCategory);
     void setAmount (float newAmount);
 
     int getUserId ();
-    int getDate ();
+    string getDate ();
     string getCategory ();
     float getAmount ();
 
