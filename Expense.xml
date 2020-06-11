@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Expenses>
+<Expense>
+<ExpenseID>1</ExpenseID>
+<UserID>1</UserID>
+<Date>2020-06-09</Date>
+<Category>Zakupy</Category>
+<Amount>23</Amount>
+</Expense>
+<Expense>
+<ExpenseID>2</ExpenseID>
+<UserID>3</UserID>
+<Date>2000-02-28</Date>
+<Category>Zakupy</Category>
+<Amount>123</Amount>
+</Expense>
+</Expenses>

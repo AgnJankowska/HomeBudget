@@ -21,21 +21,20 @@ void UsersFile::saveUserToFile(User user)
     xml.AddElem ("Login", user.getLogin());
     xml.AddElem ("Password", user.getPassword());
 
-    xml.Save("users.xml");
+    xml.Save(NAME_OF_FILE_WITH_USERS);
 }
 
 void UsersFile::saveAllUsersToFile(vector <User> users)
 {
     CMarkup xml;
-    bool IsFileExist=xml.Load (NAME_OF_FILE_WITH_USERS);
 
+    xml.Load (NAME_OF_FILE_WITH_USERS);
     xml.ResetPos();
     xml.RemoveElem();
     xml.SetDoc("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
     xml.AddElem ("Users");
 
-    for (int i=0; i<users.size(); i++)
-    {
+    for (int i=0; i<users.size(); i++){
         xml.FindElem();
         xml.IntoElem();
         xml.AddElem ("User");
@@ -57,9 +56,7 @@ vector <User> UsersFile::loadUsersFromFile()
     User user;
     CMarkup xml;
 
-    bool IsFileExist = xml.Load (NAME_OF_FILE_WITH_USERS);
-
-    string zmienna;
+    xml.Load (NAME_OF_FILE_WITH_USERS);
     xml.ResetPos();
     xml.FindElem();
     xml.IntoElem();

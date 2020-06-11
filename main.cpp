@@ -4,7 +4,7 @@ using namespace std;
 
 int main()
 {
-    HomeBudget homeBudget("Users.xml");
+    HomeBudget homeBudget("Users.xml", "Income.xml", "Expense.xml");
     char userChoice;
     while (true) {
         if (homeBudget.isUserSignedIn() == false) {
@@ -32,19 +32,19 @@ int main()
 
             switch (userChoice) {
             case '1':
-                ;
+                homeBudget.addIncome();
                 break;
             case '2':
-                ;
+                homeBudget.addExpense();
                 break;
             case '3':
-                ;
+                homeBudget.displayBalanceFromCurrentMonth();
                 break;
             case '4':
-                ;
+                homeBudget.displayBalanceFromPreviousMonth();
                 break;
             case '5':
-                ;
+                homeBudget.displayBalanceFromDesignedTime();
                 break;
             case '6':
                 homeBudget.changePassword();
