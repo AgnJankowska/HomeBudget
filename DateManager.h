@@ -16,13 +16,10 @@ public:
 
 private:
     string getCurrentDate();
-    int getYear (string date);
-    int getMonth (string date);
-    int getDay (string date);
 
     bool isTheGivenDateCorrect(string dateInFullFormat);
-    bool isThisYearLeap(int year);
-    int checkNumberOfDays (int year, int month);
+    bool isThisYearLeap(Date date);
+    int checkNumberOfDays (Date date);
 
 
     };

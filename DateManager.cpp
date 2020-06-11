@@ -59,16 +59,16 @@ string DateManager::getCurrentDate()
     return (year+"-"+month+"-"+day);
 }
 
-bool DateManager::isThisYearLeap(int year) {
-  if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
+bool DateManager::isThisYearLeap(Date date) {
+  if ((date.getYear() % 4 == 0 && date.getYear() % 100 != 0) || date.getYear() % 400 == 0)
     return true;
   else
     return false;
 }
 
-int DateManager::checkNumberOfDays (int year, int month)
+int DateManager::checkNumberOfDays (Date date)
 {
-    switch (month)
+    switch (date.getMonth())
     {
     case 1:
     case 3:
@@ -91,56 +91,26 @@ int DateManager::checkNumberOfDays (int year, int month)
 
     case 2:
     {
-        if (isThisYearLeap(year))   return 29;
-        else                        return 28;
+        if (isThisYearLeap(date))   return 29;
+        else                                return 28;
     }
     }
     return 0;
 }
 
-int DateManager::getYear (string date)
-{
-    char sign = '-';
-    size_t position = date.find(sign);
-    string year = date.substr(0,position+1);
+bool DateManager::isTheGivenDateCorrect (string dateInFullFormat) {
 
-    return SubsidiaryMethods::conversionStrintToInteger(year);
-}
+    Date date;
+    date.setYear (dateInFullFormat);
+    date.setMonth (dateInFullFormat);
+    date.setDay (dateInFullFormat);
 
-int DateManager::getMonth (string date)
-{
-    char sign = '-';
-    size_t position = date.find(sign);
-    size_t position2 = date.find(sign, position+1);
-
-    string month = date.substr(position+1,position2+1);
-
-    return SubsidiaryMethods::conversionStrintToInteger(month);
-}
-
-int DateManager::getDay (string date)
-{
-    char sign = '-';
-    size_t position = date.find(sign);
-    size_t position2 = date.find(sign, position+1);
-
-    string day = date.substr(position2+1, 2);
-
-    return SubsidiaryMethods::conversionStrintToInteger(day);
-}
-
-bool DateManager::isTheGivenDateCorrect (string date) {
-
-    int year = getYear (date);
-    int month = getMonth (date);
-    int day = getDay (date);
-
-    if (year >= 1900)
+    if (date.getYear() >= 1900)
     {
-        if (month >= 1 && month <=12)
+        if (date.getMonth() >= 1 && date.getMonth() <=12)
         {
-            int numberOfDaysInMonth = checkNumberOfDays(year, month);
-            if (day >= 1 && day <= numberOfDaysInMonth)
+            int numberOfDaysInMonth = checkNumberOfDays(date);
+            if (date.getDay() >= 1 && date.getDay() <= numberOfDaysInMonth)
                 return true;
         }
     }
