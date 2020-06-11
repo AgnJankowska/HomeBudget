@@ -41,7 +41,32 @@ void ExpensesFile::saveExpenseToFile (Expense expense){
     xml.Save(NAME_OF_EXPENSES_FILE);
 }
 
-void ExpensesFile::loadExpensesFromFile (){
-;
+vector <Expense> ExpensesFile::loadExpensesFromFile (int ID_ZALOGOWANEGO_UZYTKOWNIKA){
+    Expense expense;
+    CMarkup xml;
+
+    xml.Load (NAME_OF_EXPENSES_FILE);
+    xml.ResetPos();
+    xml.FindElem();
+    xml.IntoElem();
+
+    while ( xml.FindElem("Expense") )
+    {
+        xml.IntoElem();
+        xml.FindElem("ExpenseID");
+        expense.setExpenseId(SubsidiaryMethods::conversionStrintToInteger(xml.GetData()));
+        xml.FindElem("UserID");
+        expense.setUserId(SubsidiaryMethods::conversionStrintToInteger(xml.GetData()));
+        xml.FindElem("Date");
+        expense.setDate(xml.GetData());
+        xml.FindElem("Category");
+        expense.setCategory(xml.GetData());
+        xml.FindElem("Amount");
+        expense.setAmount(SubsidiaryMethods::conversionStrintToFloat(xml.GetData()));
+
+        xml.OutOfElem();
+        expenses.push_back(expense);
+    }
+    return expenses;
 }
 

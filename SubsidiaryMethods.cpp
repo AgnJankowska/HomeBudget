@@ -33,6 +33,15 @@ int SubsidiaryMethods::conversionStrintToInteger(string number) {
     return numberInt;
 }
 
+int SubsidiaryMethods::conversionStrintToFloat(string number) {
+    float numberFloat;
+    istringstream iss(number);
+    iss >> numberFloat;
+
+    return numberFloat;
+}
+
+
 char SubsidiaryMethods::getCharacter() {
     string input = "";
     char character  = {0};

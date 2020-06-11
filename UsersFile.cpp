@@ -57,8 +57,6 @@ vector <User> UsersFile::loadUsersFromFile()
     CMarkup xml;
 
     xml.Load (NAME_OF_FILE_WITH_USERS);
-
-    string zmienna;
     xml.ResetPos();
     xml.FindElem();
     xml.IntoElem();

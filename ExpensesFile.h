@@ -4,13 +4,12 @@
 #include <vector>
 
 #include "Markup.h"
-#include "CashFlowFile.h"
 #include "Expense.h"
 #include "SubsidiaryMethods.h"
 
 using namespace std;
 
-class ExpensesFile : public CashFlowFile
+class ExpensesFile
     {
     vector <Expense> expenses;
     const string NAME_OF_EXPENSES_FILE;
@@ -20,7 +19,8 @@ public:
 
     int getIdOfLastExpense();
     void saveExpenseToFile (Expense expense);
-    void loadExpensesFromFile ();
+    vector <Expense> loadExpensesFromFile (int ID_ZALOGOWANEGO_UZYTKOWNIKA);
+
 
     };
 #endif

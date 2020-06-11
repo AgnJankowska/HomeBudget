@@ -38,13 +38,13 @@ int main()
                 homeBudget.addExpense();
                 break;
             case '3':
-                ;
+                homeBudget.displayBalanceFromCurrentMonth();
                 break;
             case '4':
-                ;
+                homeBudget.displayBalanceFromPreviousMonth();
                 break;
             case '5':
-                ;
+                homeBudget.displayBalanceFromDesignedTime();
                 break;
             case '6':
                 homeBudget.changePassword();

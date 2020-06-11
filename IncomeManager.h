@@ -25,14 +25,12 @@ public:
     IncomeManager (string nameOfIncomesFile, int userId)
     : incomesFile (nameOfIncomesFile), ID_OF_SIGNED_IN_USER (userId)
     {
-        //incomes = incomesFile.loadIncomesOfSignedInUser(ID_ZALOGOWANEGO_UZYTKOWNIKA);
+        incomes = incomesFile.loadIncomesFromFile(ID_OF_SIGNED_IN_USER);
     };
 
     void addIncome();
 
 private:
-    void addIncomeToIncomesFile(Income income);
-    int getIdOfSignedInUser();
     void displayAddedIncome(Income income);
     Income enterNewIncomeData();
 
