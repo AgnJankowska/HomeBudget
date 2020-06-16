@@ -37,7 +37,7 @@ void ExpensesFile::saveExpenseToFile (Expense expense){
     xml.AddElem ("Date", expense.getDate());
     xml.AddElem ("DateInt", expense.getDateInt());
     xml.AddElem ("Category", expense.getCategory());
-    xml.AddElem ("Amount", expense.getAmount());
+    xml.AddElem ("Amount", SubsidiaryMethods::conversionFloatToString(expense.getAmount()));
 
     xml.Save(NAME_OF_EXPENSES_FILE);
 }

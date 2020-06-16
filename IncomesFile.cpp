@@ -20,7 +20,6 @@ int IncomesFile::getIdOfLastIncome(){
         }
         return idOfLastIncome;
     }
-
 }
 
 void IncomesFile::saveIncomeToFile (Income income){
@@ -42,9 +41,10 @@ void IncomesFile::saveIncomeToFile (Income income){
     xml.AddElem ("Date", income.getDate());
     xml.AddElem ("DateInt", income.getDateInt());
     xml.AddElem ("Category", income.getCategory());
-    xml.AddElem ("Amount", income.getAmount());
+    xml.AddElem ("Amount", SubsidiaryMethods::conversionFloatToString(income.getAmount()));
 
     xml.Save(NAME_OF_INCOMES_FILE);
+
 }
 
 vector <Income> IncomesFile::loadIncomesFromFile (int ID_ZALOGOWANEGO_UZYTKOWNIKA){

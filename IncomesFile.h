@@ -2,7 +2,6 @@
 #define IncomesFile_H
 #include <iostream>
 #include <vector>
-
 #include "Markup.h"
 #include "Income.h"
 #include "SubsidiaryMethods.h"

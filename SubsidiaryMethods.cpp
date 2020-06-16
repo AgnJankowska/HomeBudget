@@ -7,6 +7,13 @@ string SubsidiaryMethods::conversionIntegerToString(int number) {
     return str;
 }
 
+string SubsidiaryMethods::conversionFloatToString(float number) {
+    ostringstream ss;
+    ss << number;
+    string str = ss.str();
+    return str;
+}
+
 string SubsidiaryMethods::getLine() {
     cin.sync();
     string input = "";
@@ -22,7 +29,7 @@ int SubsidiaryMethods::conversionStrintToInteger(string number) {
     return numberInt;
 }
 
-int SubsidiaryMethods::conversionStrintToFloat(string number) {
+float SubsidiaryMethods::conversionStrintToFloat(string number) {
     float numberFloat;
     istringstream iss(number);
     iss >> numberFloat;
@@ -72,7 +79,7 @@ string SubsidiaryMethods::switchFirstLetterToCapital(string text) {
 
 float SubsidiaryMethods::getFloatingNumberWithDot() {
     string input;
-    float floatingNumber = 0;
+    float floatingNumber = 0.00;
 
     while (true) {
         getline(cin, input);
