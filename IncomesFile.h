@@ -11,11 +11,10 @@ using namespace std;
 
 class IncomesFile
     {
-    vector <Income> incomes;
-    const string NAME_OF_INCOME_FILE;
+    const string NAME_OF_INCOMES_FILE;
 
 public:
-    IncomesFile (string nameOfIncomesFile) : NAME_OF_INCOME_FILE(nameOfIncomesFile) {};
+    IncomesFile (string nameOfIncomesFile) : NAME_OF_INCOMES_FILE(nameOfIncomesFile) {};
 
     int getIdOfLastIncome();
     void saveIncomeToFile (Income income);

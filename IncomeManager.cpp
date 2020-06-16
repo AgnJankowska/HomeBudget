@@ -9,6 +9,7 @@ Income IncomeManager::enterNewIncomeData(){
 
     string date = dateManager.selectDateOfIncomeOrExpense();
     income.setDate(date);
+    income.setDateInt(date);
 
     cout << "Podaj krotki opis: ";
     income.setCategory(SubsidiaryMethods::getLine());

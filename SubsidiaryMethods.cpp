@@ -13,17 +13,6 @@ string SubsidiaryMethods::getLine() {
     getline(cin, input);
     return input;
 }
-/*
-
-string SubsidiaryMethods::pobierzLiczbe(string tekst, int pozycjaZnaku) {
-    string liczba = "";
-    while(isdigit(tekst[pozycjaZnaku]) == true) {
-        liczba += tekst[pozycjaZnaku];
-        pozycjaZnaku ++;
-    }
-    return liczba;
-}
-*/
 
 int SubsidiaryMethods::conversionStrintToInteger(string number) {
     int numberInt;
@@ -40,7 +29,6 @@ int SubsidiaryMethods::conversionStrintToFloat(string number) {
 
     return numberFloat;
 }
-
 
 char SubsidiaryMethods::getCharacter() {
     string input = "";
@@ -106,5 +94,13 @@ float SubsidiaryMethods::getFloatingNumberWithDot() {
     float rounded = round(floatingNumber/precision)*precision;
 
     return  rounded;
+}
+
+int SubsidiaryMethods::switchDateInFullFormatToInteger(string date){
+    string teporaryDate = date.erase(4,1);
+    teporaryDate = teporaryDate.erase(6,1);
+
+    int dateInt = conversionStrintToInteger(teporaryDate);
+    return dateInt;
 }
 

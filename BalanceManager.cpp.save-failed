@@ -1,0 +1,92 @@
+#include "BalanceManager.h"
+
+void BalanceManager::displayBalanceFromCurrentMonth(){
+    string  beginingDateOfRange = dateManager.getBeginningOfCurrentMonthDate();
+    string endingDateOfRange = dateManager.getEndOfCurrentMonthDate();
+}
+
+void BalanceManager::displayBalanceFromPreviousMonth(){
+    string beginingDateOfRange = dateManager.getBeginningOfNextMonthDate();
+    string endingDateOfRange = dateManager.getEndOfNextMonthDate();
+}
+
+void BalanceManager::displayBalanceFromDesignedTime(){
+    cout << "Wskaz poczatek zakresu. ";
+    string beginingDateOfRange = dateManager.selectDate();
+    cout << endl << "Wskaz koniec zakresu. ";
+    string endingDateOfRange = dateManager.selectDate();
+}
+
+bool BalanceManager::comparissionFunction(Income& income1, Income& income2 ) {
+    return (income1.getDateInt() < income2.getDateInt() );
+}
+
+vector <Income> BalanceManager::sortVectorOfIncomes (){
+
+   sort( incomes.begin(), incomes.end(), comparissionFunction);
+}
+
+
+
+/*void BalanceManager::checkComparedDateOfIncomeOrExpense(string beginingDateOfRange, string endingDateOfRange)
+{
+    Date beginingDate;
+    Date endingDate;
+    Date comparedDate;
+
+        //Podany przez uzytkownika dzieñ pocz¹tku bilansu
+    beginingDate.setDay(beginingDateOfRange);
+    beginingDate.setMonth(beginingDateOfRange);
+    beginingDate.setYear(beginingDateOfRange);
+
+    //Podany przez uzytkownika dzieñ koñca bilansu
+    endingDate.setDay(endingDateOfRange);
+    endingDate.setMonth(endingDateOfRange);
+    endingDate.setYear(endingDateOfRange);
+
+    //Pobrana z pliku data wydatku / przychodu
+    comparedDate.setDay(2010-12-05);
+    comparedDate.setMonth(2010-12-05);
+    comparedDate.setYear(2010-12-05);
+
+    //Sprawdzenie czy pobrana data mieœci siê w zakresie bilansu
+    if (comparedYear > beginingYearOfRange && comparedYear < endingYearOfRange)
+        cout << "Uwzglednic";
+
+    else if (comparedYear == beginingYearOfRange && beginingYearOfRange != endingYearOfRange)
+    {
+        if (comparedMonth > beginingMonthOfRange)
+            cout << "Uwzglednic";
+
+        else if (comparedMonth == beginingMonthOfRange && comparedDay >= beginingDayOfRange)
+            cout << "Uwzglednic";
+    }
+
+    else if (comparedYear == endingYearOfRange && beginingYearOfRange != endingYearOfRange)
+    {
+        if (comparedMonth < endingMonthOfRange)
+            cout << "Uwzglednic";
+
+        else if (comparedMonth == endingMonthOfRange && comparedDay <= endingDayOfRange)
+            cout << "Uwzglednic";
+    }
+
+    else if (comparedYear == endingYearOfRange && beginingYearOfRange == endingYearOfRange)
+    {
+        if (comparedMonth > beginingMonthOfRange && comparedMonth < endingMonthOfRange)
+            cout << "Uwzglednic";
+
+        else if (comparedMonth == beginingMonthOfRange && comparedDay >= beginingDayOfRange && beginingMonthOfRange != endingMonthOfRange)
+            cout << "Uwzglednic";
+
+        else if (comparedMonth == endingMonthOfRange && comparedDay <= endingDayOfRange && beginingMonthOfRange != endingMonthOfRange)
+            cout << "Uwzglednic";
+
+        else if (comparedMonth == beginingMonthOfRange && beginingMonthOfRange == endingMonthOfRange)
+        {
+            if (comparedDay >= beginingDayOfRange && comparedDay <= endingDayOfRange)
+            cout << "Uwzglednic";
+        }
+    }
+}
+*/

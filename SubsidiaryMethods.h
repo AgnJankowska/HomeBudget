@@ -18,6 +18,7 @@ public:
     static int conversionStrintToFloat(string number);
     static char getCharacter();
     static string switchFirstLetterToCapital(string text);
+    static int switchDateInFullFormatToInteger(string date);
     //static int wczytajLiczbeCalkowita();
 };
 #endif

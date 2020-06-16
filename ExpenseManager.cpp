@@ -9,6 +9,7 @@ Expense ExpenseManager::enterNewExpenseData(){
 
     string date = dateManager.selectDateOfIncomeOrExpense();
     expense.setDate(date);
+    expense.setDateInt(date);
 
     cout << "Podaj krotki opis: ";
     expense.setCategory(SubsidiaryMethods::getLine());

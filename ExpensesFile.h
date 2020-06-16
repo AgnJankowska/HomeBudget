@@ -11,7 +11,6 @@ using namespace std;
 
 class ExpensesFile
     {
-    vector <Expense> expenses;
     const string NAME_OF_EXPENSES_FILE;
 
 public:
@@ -21,7 +20,5 @@ public:
     void saveExpenseToFile (Expense expense);
     vector <Expense> loadExpensesFromFile (int ID_ZALOGOWANEGO_UZYTKOWNIKA);
 
-
     };
 #endif
-
