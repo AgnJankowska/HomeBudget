@@ -31,8 +31,6 @@ public:
     void addExpense();
 
 private:
-    void addExpenseToExpensesFile(Expense expense);
-    int getIdOfSignedInUser();
     void displayAddedExpense(Expense expense);
     Expense enterNewExpenseData();
     };

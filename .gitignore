@@ -1,4 +1,6 @@
 bin/ 
 obj/
-HomeBudget.*
+HomeBudget.depend
+HomeBudget.cbp
+HomeBudget.layout
 *.xml
