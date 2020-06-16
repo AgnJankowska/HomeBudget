@@ -1,6 +1,7 @@
 #ifndef Date_H
 #define Date_H
 #include <iostream>
+# include "SubsidiaryMethods.h"
 using namespace std;
 
 class Date
@@ -17,9 +18,9 @@ public:
         this -> day = day;
     }
 
-    void setYear (int newYear);
-    void setMonth (int newMonth);
-    void setDay (int newDay);
+    void setYear (string date);
+    void setMonth (string date);
+    void setDay (string date);
 
     int getYear ();
     int getMonth ();

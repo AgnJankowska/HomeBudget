@@ -23,10 +23,7 @@ private:
 
 public:
     IncomeManager (string nameOfIncomesFile, int userId)
-    : incomesFile (nameOfIncomesFile), ID_OF_SIGNED_IN_USER (userId)
-    {
-        incomes = incomesFile.loadIncomesFromFile(ID_OF_SIGNED_IN_USER);
-    };
+    : incomesFile (nameOfIncomesFile), ID_OF_SIGNED_IN_USER (userId)  {};
 
     void addIncome();
 

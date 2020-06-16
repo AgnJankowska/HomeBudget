@@ -7,23 +7,19 @@ string SubsidiaryMethods::conversionIntegerToString(int number) {
     return str;
 }
 
+string SubsidiaryMethods::conversionFloatToString(float number) {
+    ostringstream ss;
+    ss << number;
+    string str = ss.str();
+    return str;
+}
+
 string SubsidiaryMethods::getLine() {
     cin.sync();
     string input = "";
     getline(cin, input);
     return input;
 }
-/*
-
-string SubsidiaryMethods::pobierzLiczbe(string tekst, int pozycjaZnaku) {
-    string liczba = "";
-    while(isdigit(tekst[pozycjaZnaku]) == true) {
-        liczba += tekst[pozycjaZnaku];
-        pozycjaZnaku ++;
-    }
-    return liczba;
-}
-*/
 
 int SubsidiaryMethods::conversionStrintToInteger(string number) {
     int numberInt;
@@ -33,14 +29,13 @@ int SubsidiaryMethods::conversionStrintToInteger(string number) {
     return numberInt;
 }
 
-int SubsidiaryMethods::conversionStrintToFloat(string number) {
+float SubsidiaryMethods::conversionStrintToFloat(string number) {
     float numberFloat;
     istringstream iss(number);
     iss >> numberFloat;
 
     return numberFloat;
 }
-
 
 char SubsidiaryMethods::getCharacter() {
     string input = "";
@@ -84,7 +79,7 @@ string SubsidiaryMethods::switchFirstLetterToCapital(string text) {
 
 float SubsidiaryMethods::getFloatingNumberWithDot() {
     string input;
-    float floatingNumber = 0;
+    float floatingNumber = 0.00;
 
     while (true) {
         getline(cin, input);
@@ -106,5 +101,13 @@ float SubsidiaryMethods::getFloatingNumberWithDot() {
     float rounded = round(floatingNumber/precision)*precision;
 
     return  rounded;
+}
+
+int SubsidiaryMethods::switchDateInFullFormatToInteger(string date){
+    string teporaryDate = date.erase(4,1);
+    teporaryDate = teporaryDate.erase(6,1);
+
+    int dateInt = conversionStrintToInteger(teporaryDate);
+    return dateInt;
 }
 

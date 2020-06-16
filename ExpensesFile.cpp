@@ -35,13 +35,16 @@ void ExpensesFile::saveExpenseToFile (Expense expense){
     xml.AddElem ("ExpenseID", expense.getExpenseId());
     xml.AddElem ("UserID", expense.getUserId());
     xml.AddElem ("Date", expense.getDate());
+    xml.AddElem ("DateInt", expense.getDateInt());
     xml.AddElem ("Category", expense.getCategory());
-    xml.AddElem ("Amount", expense.getAmount());
+    xml.AddElem ("Amount", SubsidiaryMethods::conversionFloatToString(expense.getAmount()));
 
     xml.Save(NAME_OF_EXPENSES_FILE);
 }
 
 vector <Expense> ExpensesFile::loadExpensesFromFile (int ID_ZALOGOWANEGO_UZYTKOWNIKA){
+
+    vector <Expense> expenses;
     Expense expense;
     CMarkup xml;
 
@@ -53,20 +56,25 @@ vector <Expense> ExpensesFile::loadExpensesFromFile (int ID_ZALOGOWANEGO_UZYTKOW
     while ( xml.FindElem("Expense") )
     {
         xml.IntoElem();
-        xml.FindElem("ExpenseID");
-        expense.setExpenseId(SubsidiaryMethods::conversionStrintToInteger(xml.GetData()));
         xml.FindElem("UserID");
-        expense.setUserId(SubsidiaryMethods::conversionStrintToInteger(xml.GetData()));
-        xml.FindElem("Date");
-        expense.setDate(xml.GetData());
-        xml.FindElem("Category");
-        expense.setCategory(xml.GetData());
-        xml.FindElem("Amount");
-        expense.setAmount(SubsidiaryMethods::conversionStrintToFloat(xml.GetData()));
+        if (SubsidiaryMethods::conversionStrintToInteger(xml.GetData()) == ID_ZALOGOWANEGO_UZYTKOWNIKA)
+        {
+            xml.ResetMainPos();
+            xml.FindElem("ExpenseID");
+            expense.setExpenseId(SubsidiaryMethods::conversionStrintToInteger(xml.GetData()));
+            xml.FindElem("UserID");
+            expense.setUserId(SubsidiaryMethods::conversionStrintToInteger(xml.GetData()));
+            xml.FindElem("Date");
+            expense.setDate(xml.GetData());
+            expense.setDateInt(expense.getDate());
+            xml.FindElem("Category");
+            expense.setCategory(xml.GetData());
+            xml.FindElem("Amount");
+            expense.setAmount(SubsidiaryMethods::conversionStrintToFloat(xml.GetData()));
 
+            expenses.push_back(expense);
+        }
         xml.OutOfElem();
-        expenses.push_back(expense);
     }
     return expenses;
 }
-

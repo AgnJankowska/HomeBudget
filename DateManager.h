@@ -13,16 +13,20 @@ class DateManager
     {
 public:
     string selectDateOfIncomeOrExpense();
+    string selectDate();
+    string getCurrentDate();
+
+    string getBeginningOfCurrentMonthDate();
+    string getEndOfCurrentMonthDate();
+    string getBeginningOfPreviousMonthDate();
+    string getEndOfPreviousMonthDate();
+    bool isEndingAfterBegining(string beginingDateOfRange, string endingDateOfRange);
 
 private:
-    string getCurrentDate();
-    int getYear (string date);
-    int getMonth (string date);
-    int getDay (string date);
-
+    int convertDateFromStringToInteger (string dateInFullFormat);
     bool isTheGivenDateCorrect(string dateInFullFormat);
-    bool isThisYearLeap(int year);
-    int checkNumberOfDays (int year, int month);
+    bool isThisYearLeap(Date date);
+    int checkNumberOfDays (Date date);
 
 
     };

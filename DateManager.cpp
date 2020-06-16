@@ -1,5 +1,20 @@
 #include "DateManager.h"
 
+string DateManager::selectDate() {
+
+    string dateInFullFormat = "";
+    cout << "Podaj date (format rrrr-mm-dd): ";
+    dateInFullFormat = SubsidiaryMethods::getLine();
+
+    while (!isTheGivenDateCorrect(dateInFullFormat))
+    {
+        cout << "Podana data jest niepoprawna! Podaj date (format rrrr-mm-dd): ";
+        dateInFullFormat = SubsidiaryMethods::getLine();
+    }
+    return dateInFullFormat;
+}
+
+
 string DateManager::selectDateOfIncomeOrExpense() {
 
     string dateInFullFormat = "";
@@ -16,15 +31,7 @@ string DateManager::selectDateOfIncomeOrExpense() {
                 }
             break;
             case '2': {
-                cout << "Podaj date (format rrrr-mm-dd): ";
-                cin >> dateInFullFormat;
-                while (!isTheGivenDateCorrect(dateInFullFormat))
-                {
-                    cout << endl;
-                    cout << "Podana data jest niepoprawna." << endl;
-                    cout << "Podaj date (format rrrr-mm-dd): ";
-                    cin >> dateInFullFormat;
-                }
+                dateInFullFormat = selectDate();
                 }
             break;
             default: {
@@ -59,16 +66,96 @@ string DateManager::getCurrentDate()
     return (year+"-"+month+"-"+day);
 }
 
-bool DateManager::isThisYearLeap(int year) {
-  if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
+string DateManager::getBeginningOfCurrentMonthDate(){
+
+    string endOfMonth = getEndOfCurrentMonthDate();
+    string beginningOfMonth = endOfMonth.replace(8, 2, "01");
+    return beginningOfMonth;
+}
+
+string DateManager::getEndOfCurrentMonthDate()
+{
+    string currentDate = getCurrentDate();
+
+    Date date;
+    date.setYear (currentDate);
+    date.setMonth (currentDate);
+    date.setDay (currentDate);
+
+    int yearInt = date.getYear ();
+    int monthInt = date.getMonth ();
+    int dayInt = checkNumberOfDays(date);
+
+    string year = SubsidiaryMethods::conversionIntegerToString(yearInt);
+    string month = SubsidiaryMethods::conversionIntegerToString(monthInt);
+    string day = SubsidiaryMethods::conversionIntegerToString(dayInt);
+
+    if (monthInt < 10)
+        month = "0" + month;
+
+    if (dayInt < 10)
+        day = "0" + day;
+
+    return (year+"-"+month+"-"+day);
+}
+
+string DateManager::getBeginningOfPreviousMonthDate(){
+
+    string endOfMonth = getEndOfPreviousMonthDate();
+    string beginningOfMonth = endOfMonth.replace(8, 2, "01");
+    return beginningOfMonth;
+}
+
+string DateManager::getEndOfPreviousMonthDate(){
+
+    string currentDate = getCurrentDate();
+    Date date;
+    date.setYear (currentDate);
+    date.setMonth (currentDate);
+    date.setDay (currentDate);
+
+    int yearInt = date.getYear ();
+    int monthInt = date.getMonth ();
+    int dayInt = date.getMonth ();
+
+    int nextMonthInt = monthInt - 1;
+    string nextMonth = SubsidiaryMethods::conversionIntegerToString(nextMonthInt);
+    if (monthInt < 10)
+        nextMonth = "0" + nextMonth;
+
+    string nextMonthDate = currentDate.replace(5, 2, nextMonth);
+
+    date.setYear (nextMonthDate);
+    date.setMonth (nextMonthDate);
+    date.setDay (nextMonthDate);
+
+    yearInt = date.getYear ();
+    monthInt = date.getMonth ();
+    dayInt = checkNumberOfDays(date);
+
+    string year = SubsidiaryMethods::conversionIntegerToString(yearInt);
+    string month = SubsidiaryMethods::conversionIntegerToString(monthInt);
+    string day = SubsidiaryMethods::conversionIntegerToString(dayInt);
+
+    if (monthInt < 10)
+        month = "0" + month;
+
+    if (dayInt < 10)
+        day = "0" + day;
+
+    return (year+"-"+month+"-"+day);
+}
+
+
+bool DateManager::isThisYearLeap(Date date) {
+  if ((date.getYear() % 4 == 0 && date.getYear() % 100 != 0) || date.getYear() % 400 == 0)
     return true;
   else
     return false;
 }
 
-int DateManager::checkNumberOfDays (int year, int month)
-{
-    switch (month)
+int DateManager::checkNumberOfDays (Date date){
+    switch (date.getMonth())
     {
     case 1:
     case 3:
@@ -91,56 +178,51 @@ int DateManager::checkNumberOfDays (int year, int month)
 
     case 2:
     {
-        if (isThisYearLeap(year))   return 29;
+        if (isThisYearLeap(date))   return 29;
         else                        return 28;
     }
     }
     return 0;
 }
 
-int DateManager::getYear (string date)
-{
-    char sign = '-';
-    size_t position = date.find(sign);
-    string year = date.substr(0,position+1);
+bool DateManager::isTheGivenDateCorrect (string dateInFullFormat) {
 
-    return SubsidiaryMethods::conversionStrintToInteger(year);
-}
+    Date date;
+    date.setYear (dateInFullFormat);
+    date.setMonth (dateInFullFormat);
+    date.setDay (dateInFullFormat);
 
-int DateManager::getMonth (string date)
-{
-    char sign = '-';
-    size_t position = date.find(sign);
-    size_t position2 = date.find(sign, position+1);
-
-    string month = date.substr(position+1,position2+1);
-
-    return SubsidiaryMethods::conversionStrintToInteger(month);
-}
-
-int DateManager::getDay (string date)
-{
-    char sign = '-';
-    size_t position = date.find(sign);
-    size_t position2 = date.find(sign, position+1);
-
-    string day = date.substr(position2+1, 2);
-
-    return SubsidiaryMethods::conversionStrintToInteger(day);
-}
-
-bool DateManager::isTheGivenDateCorrect (string date) {
-
-    int year = getYear (date);
-    int month = getMonth (date);
-    int day = getDay (date);
-
-    if (year >= 1900)
+    if (date.getYear() >= 1900)
     {
-        if (month >= 1 && month <=12)
+        if (date.getMonth() >= 1 && date.getMonth() <=12)
         {
-            int numberOfDaysInMonth = checkNumberOfDays(year, month);
-            if (day >= 1 && day <= numberOfDaysInMonth)
+            int numberOfDaysInMonth = checkNumberOfDays(date);
+            if (date.getDay() >= 1 && date.getDay() <= numberOfDaysInMonth)
+                return true;
+        }
+    }
+    return false;
+}
+
+bool DateManager::isEndingAfterBegining(string beginingDateOfRange, string endingDateOfRange){
+    Date beginingDate;
+    Date endingDate;
+
+    beginingDate.setYear (beginingDateOfRange);
+    beginingDate.setMonth (beginingDateOfRange);
+    beginingDate.setDay (beginingDateOfRange);
+
+    endingDate.setYear (endingDateOfRange);
+    endingDate.setMonth (endingDateOfRange);
+    endingDate.setDay (endingDateOfRange);
+
+    if (beginingDate.getYear() < endingDate.getYear())
+        return true;
+    else if (beginingDate.getYear() == endingDate.getYear()){
+        if (beginingDate.getMonth() < endingDate.getMonth())
+            return true;
+        else if (beginingDate.getMonth() == endingDate.getMonth()){
+            if (beginingDate.getDay() <= endingDate.getDay())
                 return true;
         }
     }
